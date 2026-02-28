@@ -1,0 +1,6 @@
+# Ignorar datos crudos
+data/raw/
+
+# Permitir datos procesados
+!data/processed/
+!data/processed/*.parquet

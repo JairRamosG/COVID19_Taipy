@@ -1,0 +1,15 @@
+[data_node.covid_data]
+path = "data/parquet/df_final.parquet"
+storage_type = "parquet"
+scope = "global"
+
+[data_node.filtros]
+storage_type = "pickle"
+default_data = {"edad_min" = 0, 
+                "edad_max" = 100, 
+                "comorbilidades" = [], 
+                "sexo" = "Todos"}
+
+[data_node.resultado]
+storage_type = "pickle"
+
