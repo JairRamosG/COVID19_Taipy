@@ -1,0 +1,54 @@
+entonces:
+tgb.indicator(
+                value=lambda state: state.metricas.get('total', 0) if state.metricas else 0,
+                label="Total pacientes"
+            )
+ se refiere a que "state metricas" hace referencia a los valores de las tareas que se actualizan en mis funciones de callback en mi archivo home.py
+
+pero esa palabra "metricas" tiene un origen en un id en el Data Node de salida de mi archivo de configuracion del pipeline:
+
+metricas_config = Config.configure_data_node(
+    id = "metricas",
+    storage_type = "pickle"
+)
+
+y dicho nodo se utiliza en la task definida en el mismo archivo de configuración, en donde se hace referencia a que dicha task hace uso de ese data node como su output, y ademas la tarea especifica que hace uso de una funcion llamada calcula_metrica_prnicipales que yo defini en mi archivo llamado filtros.
+
+# para calcular las metricas
+calcula_metricas_task_config = Config.configure_task(
+    id = 'calcula_metricas',
+    function = filtros.calcula_metricas_principales,
+    inputs = [resultado_config],
+    outputs = [metricas_config]
+)
+
+en el archivo de filtros encuentro la funcion en donde puedo rastrear el uso de la palabra "Total", que hace referencia a un valor calculado con spark
+
+def calcula_metricas_principales(df_spark):
+    '''
+    Caluclar las metricas principales para mostrarlas en un header
+    Return:
+        DIccionario con los valores de las metricas principales 
+    '''
+    metricas = df_spark.agg(
+        F.count('*').alias('Total'),
+        F.avg('EDAD').alias('media_Edad'),
+        F.sum(F.when(F.col('Sobrevivio') == 1, 1).otherwise(0)).alias('Sobrevivieron'),
+        F.sum(F.when(F.col('Sobrevivio') == 0, 1).otherwise(0)).alias('No_Sobrevivieron'),
+        F.avg('N_COMORBILIDADES').alias('promedio_comorb')
+    )
+
+    resultado = {
+        'Total' : metricas['Total'],
+        'media_Edad' : metricas['media_Edad'],
+        'Supervivientes' : metricas['Sobrevivieron'],
+        'No_Supervivientes' : metricas['No_Sobrevivieron'],
+        'promedio_comorb' : metricas['promedio_comorb']
+    }
+
+    if resultado['Total'] > 0 :
+         resultado['pct_supervivencia'] = round(resultado['Sobrevivieron'] / resultado['Total'] * 100, 1)
+         resultado['pct_mortalidad'] = round(resultado['No_Sobrevivieron'] / resultado['Total'] * 100, 1) 
+         
+    return resultado
+

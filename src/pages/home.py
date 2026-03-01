@@ -54,7 +54,7 @@ def crear_histograma(datos_grafico):
     )
     return histograma
 
-
+########## Parte visual de la página
 def build_page():
     '''
     COnstrucción de toda la parte visual de la página
@@ -62,6 +62,33 @@ def build_page():
     with tgb.Page() as page:
         tgb.text("Dashboard Covid 19 México", mode = "md")
         tgb.html("hr")
+    
+    with tgb.layout(columns = "1 1 1 1 1"):
+        tgb.indicator(
+            value = lambda state: state.metricas.get('Total', 0) if state.metricas else 0,
+            label = "Total pacientes"
+        )
+
+        tgb.indicator(
+            value = lambda state : state.metricas.get('media_Edad', 0) if state.metricas else 0,
+            label = "Edad media"
+        )
+
+        tgb.indicator(
+            value = lambda state : state.metricas.get('Supervivientes', 0) if state.metricas else 0,
+            label = "Supervivientes"
+        )
+
+        tgb.indicator(
+            value = lambda state: state.metricas.get('pct_supervivencia', 0) if state.metricas else 0,
+            label = "Porcentaje supervivencia"
+        )
+
+        tgb.indicator(
+            value = lambda state: state.metricas.get('promedio_comorb', 0) if state.metricas else 0,
+            label = "Promedio de comorbilidades"
+        )
+
 
     return page
 
