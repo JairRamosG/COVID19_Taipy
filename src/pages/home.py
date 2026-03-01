@@ -4,6 +4,15 @@ import plotly.express as px
 import pandas as pd
 import taipy as tp 
 
+def inicio_variables(state: State):
+    '''
+    Una única inicialización para los valores iniciales que trae el filtro
+    '''
+    state.edad_min = 0,
+    state.edad_max = 100,
+    state.sexo_sel = "Todos"
+    state.comorb_sel = []
+
 
 ##### FUncion para callback
 def cambio_en_filtro(state:State):
