@@ -115,7 +115,7 @@ def calcula_metricas_principales(df_spark):
          
     return resultado
 
-def datos_histograma(df_spark, limite = 1000):
+def datos_graficos(df_spark, limite = 1000):
     '''
     Muestreo para gŕaficos
     Returns:
