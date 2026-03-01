@@ -23,8 +23,8 @@ def on_filter_change(state: State):
     # 2. Ejecutar pipeline Spark
     tp.submit(state.scenario)
     
-    # 3. Leer resultados procesados por Spark
-    state.metricas = state.scenario.metricas.read()
+    # 3. Leer resultados procesados por Spark con "id" del archivo de configuracion de nodos entrada/salida
+    state.metricas = state.scenario.metricas.read() 
     state.datos_grafico = state.scenario.datos_grafico.read()
 
 

@@ -37,7 +37,7 @@ metricas_config = Config.configure_data_node(
 )
 
 # para la info de las gráficas
-datos_graficas_config = Config.configure_data_nodes(
+datos_graficas_config = Config.configure_data_node(
     id = "datos_graficas",
     storage_type = "pickle"
 )
@@ -73,7 +73,7 @@ datos_graficas_task_config = Config.configure_task(
 
 main_pipeline_config = Config.configure_pipeline(
     id = "main_pipeline",
-    task_config = [
+    task_configs = [
         filtrar_task_config,
         calcula_metricas_task_config,
         datos_graficas_task_config
