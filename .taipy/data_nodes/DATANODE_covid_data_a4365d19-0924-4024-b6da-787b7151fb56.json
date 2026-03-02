@@ -1,13 +1,13 @@
 {
-"id": "DATANODE_covid_data_c728e606-f839-422f-9012-f6b7cd6ff4ec",
+"id": "DATANODE_covid_data_a4365d19-0924-4024-b6da-787b7151fb56",
 "config_id": "covid_data",
 "scope": "<Scope.SCENARIO: 1>",
 "storage_type": "parquet",
-"owner_id": "SCENARIO_main_escenario_8e702020-bb51-4455-a083-f5c80ad9f438",
+"owner_id": "SCENARIO_main_escenario_b1e3860b-b72c-45f6-953d-8f9d27cb93de",
 "parent_ids": [
-"TASK_task_filtrar_datos_8a5fec16-f7ae-4a40-bc80-72df91101f20"
+"TASK_task_filtrar_datos_db4c68e8-1bdc-42cb-96bf-cbb399c03786"
 ],
-"last_edit_date": "2026-03-02T16:04:33.249972",
+"last_edit_date": "2026-03-02T16:42:16.920281",
 "edits": [],
 "version": "ee83111d-6828-4fca-b2ed-9ff013a96f2f",
 "validity_days": null,

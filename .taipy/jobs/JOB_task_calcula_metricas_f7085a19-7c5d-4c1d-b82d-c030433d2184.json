@@ -1,0 +1,27 @@
+{
+"id": "JOB_task_calcula_metricas_f7085a19-7c5d-4c1d-b82d-c030433d2184",
+"task_id": "TASK_task_calcula_metricas_5be98f0c-c5c8-4e64-a551-bd99a3fee140",
+"status": "<Status.BLOCKED: 2>",
+"status_change_records": {
+"SUBMITTED": "2026-03-02T16:42:17.006145",
+"BLOCKED": "2026-03-02T16:42:17.035849"
+},
+"force": false,
+"submit_id": "SUBMISSION_d628ab19-ca82-474c-bf61-2de476d95452",
+"submit_entity_id": "SCENARIO_main_escenario_b1e3860b-b72c-45f6-953d-8f9d27cb93de",
+"creation_date": "2026-03-02T16:42:17.006145",
+"subscribers": [
+{
+"fct_name": "_Orchestrator._update_submission_status",
+"fct_params": [],
+"fct_module": "taipy.core._orchestrator._orchestrator"
+},
+{
+"fct_name": "_Orchestrator._on_status_change",
+"fct_params": [],
+"fct_module": "taipy.core._orchestrator._orchestrator"
+}
+],
+"stacktrace": [],
+"version": "ee83111d-6828-4fca-b2ed-9ff013a96f2f"
+}

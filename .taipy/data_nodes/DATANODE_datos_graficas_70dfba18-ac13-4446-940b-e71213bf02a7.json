@@ -1,11 +1,11 @@
 {
-"id": "DATANODE_metricas_00af9330-d411-41c3-8310-ff53cb08f5a7",
-"config_id": "metricas",
+"id": "DATANODE_datos_graficas_70dfba18-ac13-4446-940b-e71213bf02a7",
+"config_id": "datos_graficas",
 "scope": "<Scope.SCENARIO: 1>",
 "storage_type": "pickle",
-"owner_id": "SCENARIO_main_escenario_8e702020-bb51-4455-a083-f5c80ad9f438",
+"owner_id": "SCENARIO_main_escenario_b1e3860b-b72c-45f6-953d-8f9d27cb93de",
 "parent_ids": [
-"TASK_task_calcula_metricas_21b292ed-2134-479b-a539-b7361741c3db"
+"TASK_task_datos_graficas__8935177d-5281-4328-81b1-f65400d8c139"
 ],
 "last_edit_date": null,
 "edits": [],
@@ -17,6 +17,6 @@
 "editor_expiration_date": null,
 "data_node_properties": {
 "is_generated": true,
-"path": "user_data/pickles/DATANODE_metricas_00af9330-d411-41c3-8310-ff53cb08f5a7.p"
+"path": "user_data/pickles/DATANODE_datos_graficas_70dfba18-ac13-4446-940b-e71213bf02a7.p"
 }
 }

@@ -1,0 +1,24 @@
+{
+"id": "DATANODE_resultado_43e3829d-73db-4d7d-b68c-328055a1beff",
+"config_id": "resultado",
+"scope": "<Scope.SCENARIO: 1>",
+"storage_type": "pickle",
+"owner_id": "SCENARIO_main_escenario_b1e3860b-b72c-45f6-953d-8f9d27cb93de",
+"parent_ids": [
+"TASK_task_calcula_metricas_5be98f0c-c5c8-4e64-a551-bd99a3fee140",
+"TASK_task_datos_graficas__8935177d-5281-4328-81b1-f65400d8c139",
+"TASK_task_filtrar_datos_db4c68e8-1bdc-42cb-96bf-cbb399c03786"
+],
+"last_edit_date": null,
+"edits": [],
+"version": "ee83111d-6828-4fca-b2ed-9ff013a96f2f",
+"validity_days": null,
+"validity_seconds": null,
+"edit_in_progress": true,
+"editor_id": null,
+"editor_expiration_date": null,
+"data_node_properties": {
+"is_generated": true,
+"path": "user_data/pickles/DATANODE_resultado_43e3829d-73db-4d7d-b68c-328055a1beff.p"
+}
+}

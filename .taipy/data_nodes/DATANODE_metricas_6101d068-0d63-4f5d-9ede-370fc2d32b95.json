@@ -1,11 +1,11 @@
 {
-"id": "DATANODE_datos_graficas_535f8b6e-5a6d-48fa-bfd2-24b3679ccaa5",
-"config_id": "datos_graficas",
+"id": "DATANODE_metricas_6101d068-0d63-4f5d-9ede-370fc2d32b95",
+"config_id": "metricas",
 "scope": "<Scope.SCENARIO: 1>",
 "storage_type": "pickle",
-"owner_id": "SCENARIO_main_escenario_8e702020-bb51-4455-a083-f5c80ad9f438",
+"owner_id": "SCENARIO_main_escenario_b1e3860b-b72c-45f6-953d-8f9d27cb93de",
 "parent_ids": [
-"TASK_task_datos_graficas__7e0d108b-0f9c-4453-80f1-be062185dc72"
+"TASK_task_calcula_metricas_5be98f0c-c5c8-4e64-a551-bd99a3fee140"
 ],
 "last_edit_date": null,
 "edits": [],
@@ -17,6 +17,6 @@
 "editor_expiration_date": null,
 "data_node_properties": {
 "is_generated": true,
-"path": "user_data/pickles/DATANODE_datos_graficas_535f8b6e-5a6d-48fa-bfd2-24b3679ccaa5.p"
+"path": "user_data/pickles/DATANODE_metricas_6101d068-0d63-4f5d-9ede-370fc2d32b95.p"
 }
 }

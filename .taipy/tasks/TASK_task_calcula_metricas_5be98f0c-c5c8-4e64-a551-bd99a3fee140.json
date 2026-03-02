@@ -1,0 +1,19 @@
+{
+"id": "TASK_task_calcula_metricas_5be98f0c-c5c8-4e64-a551-bd99a3fee140",
+"owner_id": "SCENARIO_main_escenario_b1e3860b-b72c-45f6-953d-8f9d27cb93de",
+"parent_ids": [
+"SCENARIO_main_escenario_b1e3860b-b72c-45f6-953d-8f9d27cb93de"
+],
+"config_id": "task_calcula_metricas",
+"input_ids": [
+"DATANODE_resultado_43e3829d-73db-4d7d-b68c-328055a1beff"
+],
+"function_name": "calcula_metricas_principales",
+"function_module": "src.algorithms.filtros",
+"output_ids": [
+"DATANODE_metricas_6101d068-0d63-4f5d-9ede-370fc2d32b95"
+],
+"version": "ee83111d-6828-4fca-b2ed-9ff013a96f2f",
+"skippable": false,
+"properties": {}
+}
