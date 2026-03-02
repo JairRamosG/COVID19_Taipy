@@ -8,8 +8,8 @@ def inicio_variables(state: State):
     '''
     Una única inicialización para los valores iniciales que trae el filtro
     '''
-    state.edad_min = 0,
-    state.edad_max = 100,
+    state.edad_min = 0
+    state.edad_max = 100
     state.sexo_sel = "Todos"
     state.comorb_sel = []
 
@@ -29,7 +29,7 @@ def cambio_en_filtro(state:State):
     })
 
     # ejecutar el Pipeline Spark
-    tp.sumit(state.scenario)
+    tp.submit(state.scenario)
 
     # actualizar TASK metricas y datos para graficas
     state.metricas = state.scenario.metricas.read()
@@ -63,31 +63,33 @@ def build_page():
         tgb.text("Dashboard Covid 19 México", mode = "md")
         tgb.html("hr")
     
-    with tgb.layout(columns = "1 1 1 1 1"):
-        tgb.indicator(
-            value = lambda state: state.metricas.get('Total', 0) if state.metricas else 0,
-            label = "Total pacientes"
-        )
+        with tgb.layout(columns = "1 1 1 1 1"):
+            tgb.indicator(
+                value = lambda state: state.metricas.get('Total', 0) if state.metricas else 0,
+                label = "Total pacientes"
+            )
 
-        tgb.indicator(
-            value = lambda state : state.metricas.get('media_Edad', 0) if state.metricas else 0,
-            label = "Edad media"
-        )
+            tgb.indicator(
+                value = lambda state : state.metricas.get('media_Edad', 0) if state.metricas else 0,
+                label = "Edad media"
+            )
 
-        tgb.indicator(
-            value = lambda state : state.metricas.get('Supervivientes', 0) if state.metricas else 0,
-            label = "Supervivientes"
-        )
+            tgb.indicator(
+                value = lambda state : state.metricas.get('Supervivientes', 0) if state.metricas else 0,
+                label = "Supervivientes"
+            )
 
-        tgb.indicator(
-            value = lambda state: state.metricas.get('pct_supervivencia', 0) if state.metricas else 0,
-            label = "Porcentaje supervivencia"
-        )
+            tgb.indicator(
+                value = lambda state: state.metricas.get('pct_supervivencia', 0) if state.metricas else 0,
+                label = "Porcentaje supervivencia"
+            )
 
-        tgb.indicator(
-            value = lambda state: state.metricas.get('promedio_comorb', 0) if state.metricas else 0,
-            label = "Promedio de comorbilidades"
-        )
+            tgb.indicator(
+                value = lambda state: state.metricas.get('promedio_comorb', 0) if state.metricas else 0,
+                label = "Promedio de comorbilidades"
+            )
+
+        tgb.html("hr")
 
 
     return page

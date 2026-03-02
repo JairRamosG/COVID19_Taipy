@@ -17,7 +17,7 @@ filter_config = Config.configure_data_node(
     default_data = {
         "edad_min" : 0,
         "edad_max" : 100,
-        "sexo" : "Todos",
+        "Sexo" : "Todos",
         "comorbilidades" : []
     }
 )

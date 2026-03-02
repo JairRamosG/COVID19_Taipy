@@ -11,7 +11,7 @@ def get_Spark_Session():
     global _spark
     if _spark is None:
         _spark = SparkSession.builder \
-        .appName = ('Covid_Dashboard') \
+        .appName('Covid_Dashboard') \
         .config('spark.sql.adaptative.enabled', 'true') \
         .config('spark.sql.adaptative.coalescePartitions.enabled', 'true') \
         .config('spark.driver.memory', '4g') \
@@ -99,7 +99,7 @@ def calcula_metricas_principales(df_spark):
         F.sum(F.when(F.col('Sobrevivio') == 1, 1).otherwise(0)).alias('Sobrevivieron'),
         F.sum(F.when(F.col('Sobrevivio') == 0, 1).otherwise(0)).alias('No_Sobrevivieron'),
         F.avg('N_COMORBILIDADES').alias('promedio_comorb')
-    )
+    ).collect[0]
 
     resultado = {
         'Total' : metricas['Total'],
@@ -110,8 +110,8 @@ def calcula_metricas_principales(df_spark):
     }
 
     if resultado['Total'] > 0 :
-         resultado['pct_supervivencia'] = round(resultado['Sobrevivieron'] / resultado['Total'] * 100, 1)
-         resultado['pct_mortalidad'] = round(resultado['No_Sobrevivieron'] / resultado['Total'] * 100, 1) 
+         resultado['pct_supervivencia'] = round(resultado['Supervivientes'] / resultado['Total'] * 100, 1)
+         resultado['pct_mortalidad'] = round(resultado['No_Supervivientes'] / resultado['Total'] * 100, 1) 
          
     return resultado
 
@@ -125,8 +125,8 @@ def datos_graficos(df_spark, limite = 1000):
     muestra_pandas = muestra_spark.toPandas()
 
     muestra_pandas['Resultado'] = muestra_pandas['SOBREVIVIO'].map({
-         1 : 'Sobrevivio',
-         2 : 'Falleció'
+         1 : 'SOBREVIVIO',
+         0 : 'Falleció'
     })
 
     return muestra_pandas
