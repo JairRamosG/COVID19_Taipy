@@ -1,0 +1,20 @@
+{
+"id": "TASK_task_filtrar_datos_8a5fec16-f7ae-4a40-bc80-72df91101f20",
+"owner_id": "SCENARIO_main_escenario_8e702020-bb51-4455-a083-f5c80ad9f438",
+"parent_ids": [
+"SCENARIO_main_escenario_8e702020-bb51-4455-a083-f5c80ad9f438"
+],
+"config_id": "task_filtrar_datos",
+"input_ids": [
+"DATANODE_covid_data_c728e606-f839-422f-9012-f6b7cd6ff4ec",
+"DATANODE_filtros_64e46a10-e74f-4a14-96aa-c3b855563a23"
+],
+"function_name": "aplicar_filtros",
+"function_module": "src.algorithms.filtros",
+"output_ids": [
+"DATANODE_resultado_f4ea3bb0-e228-4f14-9753-ee12a1b4e16c"
+],
+"version": "ee83111d-6828-4fca-b2ed-9ff013a96f2f",
+"skippable": false,
+"properties": {}
+}

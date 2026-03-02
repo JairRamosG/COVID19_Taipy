@@ -3,59 +3,58 @@ from pyspark.sql import SparkSession
 from pyspark.sql import functions as F
 import pandas as pd
 
+
 def get_spark_session():
-    """Crea una nueva sesión de Spark (se llama desde cada función)"""
     return SparkSession.builder \
         .appName('Covid_Dashboard') \
         .master('local[*]') \
         .config('spark.sql.adaptive.enabled', 'true') \
-        .config('spark.driver.memory', '4g') \
+        .config('spark.driver.memory', '8g') \      
+        .config('spark.executor.memory', '8g') \      
+        .config('spark.sql.shuffle.partitions', '200') \
+        .config('spark.driver.maxResultSize', '4g') \
         .getOrCreate()
 
-def aplicar_filtros(covid_data, filtros):
-    '''
-    Filtra el Dataframe de Spark según los parámetros
-    Args:
-        covid_data: DataFrame de Spark con los datos del Data Node
-        filtros: diccionario con los filtros
-    Return:
-        Dataframe de spark ya filtrado
-    '''
-    # Inicializar Spark
+def aplicar_filtros(covid_data_pd, filtros):
+    print("="*50)
+    print("1. Iniciando función aplicar_filtros")
+    print(f"2. Tipo de covid_data_pd: {type(covid_data_pd)}")
+    
+    import time
+    start_total = time.time()
+    
+    print("3. Obteniendo sesión Spark...")
     spark = get_spark_session()
-
-    print('COnvirtiendo DataFrame a spark')
-    covid_data = spark.createDataFrame(covid_data)
+    print(f"   → Sesión Spark obtenida en {time.time()-start_total:.1f}s")
     
-    # covid_data YA es un DataFrame de Spark, pero necesitamos asegurar que
-    # la sesión está activa - lo está porque acabamos de crearla
+    print("4. Creando DataFrame Spark...")
+    start = time.time()
+    covid_data = spark.createDataFrame(covid_data_pd)
+    print(f"   → DataFrame Spark creado en {time.time()-start:.1f}s")
     
-    print(f"Aplicando filtros: {filtros}")
-    
-    ### Filtro por edad
+    print("5. Aplicando filtro de edad...")
+    start = time.time()
     df_filtrado = covid_data.filter(
         (F.col('EDAD') >= filtros['edad_min']) &
         (F.col('EDAD') <= filtros['edad_max'])
     )
-
-    ### Filtro por sexo (CORREGIDO)
-    if filtros.get('sexo', 'Todos') != 'Todos':
-        # Tus datos usan 1 para FEMENINO, 2 para MASCULINO
-        sexo_valor = 1 if filtros['sexo'] == 'Femenino' else 2
-        df_filtrado = df_filtrado.filter(F.col('SEXO') == sexo_valor)
+    print(f"   → Filtro edad aplicado en {time.time()-start:.1f}s")
     
-    ### Filtro por comorbilidades
-    if filtros.get('comorbilidades'):
-        for comorb in filtros['comorbilidades']:
-            if comorb in df_filtrado.columns:
-                df_filtrado = df_filtrado.filter(F.col(comorb) == 1)
+    print("6. Cacheando resultados...")
+    start = time.time()
+    df_filtrado.cache()
+    print(f"   → Cache configurado en {time.time()-start:.1f}s")
     
-    # Contar resultados para debug
+    print("7. Contando resultados...")
+    start = time.time()
     count = df_filtrado.count()
-    print(f"Filtro aplicado: {count} registros resultantes")
+    print(f"   → Conteo completado en {time.time()-start:.1f}s")
+    print(f"   → Registros resultantes: {count}")
+    
+    print(f"✅ Tiempo total: {time.time()-start_total:.1f}s")
+    print("="*50)
     
     return df_filtrado
-
 
 def calcula_metricas_principales(df_spark):
     '''
