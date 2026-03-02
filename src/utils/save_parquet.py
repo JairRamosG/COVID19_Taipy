@@ -34,9 +34,9 @@ def save_data(df, carpeta, particiones = None):
 
     if PARQUET_DIR.exists():
         total_size = sum(f.stat().st_size for f in PARQUET_DIR.glob('**/*') if f.is_file())
-        print(f'✅ Archivo guardado en: {PARQUET_DIR}')
-        print(f'📊 Tamaño total: {total_size / 1e6:.2f} MB')
-        print(f'📁 Particiones: {len(list(PARQUET_DIR.glob("*.parquet")))}')
+        print(f'Archivo guardado en: {PARQUET_DIR}')
+        print(f'Tamaño total: {total_size / 1e6:.2f} MB')
+        print(f'Particiones: {len(list(PARQUET_DIR.glob("*.parquet")))}')
     else:
         print('No se pudo guardar el archivo')
     

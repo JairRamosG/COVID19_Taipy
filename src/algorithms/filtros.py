@@ -51,7 +51,7 @@ def aplicar_filtros(covid_data_pd, filtros):
     print(f"   → Conteo completado en {time.time()-start:.1f}s")
     print(f"   → Registros resultantes: {count}")
     
-    print(f"✅ Tiempo total: {time.time()-start_total:.1f}s")
+    print(f"Tiempo total: {time.time()-start_total:.1f}s")
     print("="*50)
     
     return df_filtrado

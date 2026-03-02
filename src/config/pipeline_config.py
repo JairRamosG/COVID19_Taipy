@@ -8,7 +8,7 @@ from taipy.common.config import Scope
 covid_data_config = Config.configure_data_node(
     id = "covid_data",
     storage_type = "parquet",
-    path = "data/parquet/df_final.parquet",
+    path = "data/parquet/df_final",
     scope = Scope.SCENARIO
     )
 
