@@ -9,8 +9,8 @@ def get_spark_session():
         .appName('Covid_Dashboard') \
         .master('local[*]') \
         .config('spark.sql.adaptive.enabled', 'true') \
-        .config('spark.driver.memory', '8g') \      
-        .config('spark.executor.memory', '8g') \      
+        .config('spark.driver.memory', '8g') \
+        .config('spark.executor.memory', '8g') \
         .config('spark.sql.shuffle.partitions', '200') \
         .config('spark.driver.maxResultSize', '4g') \
         .getOrCreate()
