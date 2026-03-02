@@ -1,26 +1,43 @@
 from pathlib import Path
 import os
 
-def save_data(df, nombre):
+def save_data(df, carpeta, particiones = None):
     '''
     FUnción para guardar el dataset final en un archivo parquet
     Args:
-        df     (DataFrame): DataFrame de PySpark a guardar
+        df: DataFrame de PySpark a guardar
         nombre (str): nombre para el nuevo archivo parquet
+        particiones; numero de particiones
     Returns:
-        df_parquet (parquet): archivo formato parquet
+        ruta donde se guardo
     '''
     BASE_DIR = Path(os.getcwd()).parent
-    PARQUET_DIR = BASE_DIR / 'data' / 'parquet' 
+    PARQUET_DIR = BASE_DIR / 'data' / 'parquet' / carpeta 
 
     PARQUET_DIR.parent.mkdir(parents=True, exist_ok=True)
-    FILE_PATH = PARQUET_DIR / f'{nombre}.parquet'
 
-    df.write.mode('overwrite').option('compression', 'snappy').parquet((str(FILE_PATH)))
+    if particiones:
+        df = df.repartition(particiones)
+    else:
+        import multiprocessing
+        num_cpus = multiprocessing.cpu_count()
+        df = df.prepartition(num_cpus * 2)
+    
+    print(f'Guardando {df.count():,} registros en {PARQUET_DIR}')
+    print(f'particiones {df.rdd.getNumPartitions()}')
 
-    if FILE_PATH.exists():
-        print(f'Archivo guardado en : {PARQUET_DIR}')
-        print(f'Tamaño: {FILE_PATH.stat().st_size /  1e6:.f2} MB')
+
+    # Guardar como muchos parquets
+    df.write.mode('overwrite') \
+    .option('compression', 'snappy') \
+    .parquet(str(PARQUET_DIR))
+
+    if PARQUET_DIR.exists():
+        total_size = sum(f.stat().st_size for f in PARQUET_DIR.glob('**/*') if f.is_file())
+        print(f'✅ Archivo guardado en: {PARQUET_DIR}')
+        print(f'📊 Tamaño total: {total_size / 1e6:.2f} MB')
+        print(f'📁 Particiones: {len(list(PARQUET_DIR.glob("*.parquet")))}')
     else:
         print('No se pudo guardar el archivo')
-    return str(FILE_PATH)
+    
+    return str(PARQUET_DIR)
