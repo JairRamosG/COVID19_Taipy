@@ -11,6 +11,7 @@ covid_data_config = Config.configure_data_node(
     path = "data/parquet/df_final.parquet",
     scope = Scope.SCENARIO
     )
+
 # para lso filtros
 filter_config = Config.configure_data_node(
     id = "filtros",
@@ -18,7 +19,7 @@ filter_config = Config.configure_data_node(
     default_data = {
         "edad_min" : 0,
         "edad_max" : 100,
-        "Sexo" : "Todos",
+        "sexo" : "Todos",
         "comorbilidades" : []
     },
     scope = Scope.SCENARIO

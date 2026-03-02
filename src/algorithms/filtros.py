@@ -1,132 +1,120 @@
+# src/algorithms/filtros.py
 from pyspark.sql import SparkSession
 from pyspark.sql import functions as F
-from pyspark.sql.types import *
 import pandas as pd
 
-
-### INICIALIZAR SPARK UNA SOLA VEZ
-_spark = None
-
-def get_Spark_Session():
-    global _spark
-    if _spark is None:
-        _spark = SparkSession.builder \
+def get_spark_session():
+    """Crea una nueva sesión de Spark (se llama desde cada función)"""
+    return SparkSession.builder \
         .appName('Covid_Dashboard') \
-        .config('spark.sql.adaptative.enabled', 'true') \
-        .config('spark.sql.adaptative.coalescePartitions.enabled', 'true') \
+        .master('local[*]') \
+        .config('spark.sql.adaptive.enabled', 'true') \
         .config('spark.driver.memory', '4g') \
-        .config('spark.sql.execution.arrow.pyspark.enabled', 'true') \
         .getOrCreate()
-    return _spark
 
-
-### CARGAR LOS DATOS CON SPARK
-def cargar_datos_Spark(ruta_parquet):
+def aplicar_filtros(covid_data, filtros):
     '''
-    Carga los datos usando Pyspark directamente desde Parquet
+    Filtra el Dataframe de Spark según los parámetros
     Args:
-        ruta_parquet: ruta de la carpeta de archivos
-    Returns:
-        Datafrmae de Spark
-    '''
-    spark = get_Spark_Session()
-    df_spark = spark.read.parquet(ruta_parquet)
-    df_spark.cache()
-    df_spark.count()
-    return df_spark
-
-def aplicar_filtros(df_spark, filtros):
-    '''
-    FIltra el Dataframe de Spark según los parámetros
-    Args:
-        df_spark : Dataframe de spark
-        filtros : diccionario con los filtros
+        covid_data: DataFrame de Spark con los datos del Data Node
+        filtros: diccionario con los filtros
     Return:
         Dataframe de spark ya filtrado
     '''
-    df_filtrado = df_spark
+    # Inicializar Spark
+    spark = get_spark_session()
 
-    ### FIltro por edad, va a ser considerado como que si existe siempre
-    df_filtrado = df_filtrado.filter(
+    print('COnvirtiendo DataFrame a spark')
+    covid_data = spark.createDataFrame(covid_data)
+    
+    # covid_data YA es un DataFrame de Spark, pero necesitamos asegurar que
+    # la sesión está activa - lo está porque acabamos de crearla
+    
+    print(f"Aplicando filtros: {filtros}")
+    
+    ### Filtro por edad
+    df_filtrado = covid_data.filter(
         (F.col('EDAD') >= filtros['edad_min']) &
         (F.col('EDAD') <= filtros['edad_max'])
     )
 
-    ### FIltro por sexo
-    if filtros['Sexo'] != 'Todos':
-            sexo_map = {1:'Femenino', 2:'Masculino'}
-            df_filtrado = df_filtrado.filter(F.col('SEXO') == sexo_map[filtros['Sexo']])
+    ### Filtro por sexo (CORREGIDO)
+    if filtros.get('sexo', 'Todos') != 'Todos':
+        # Tus datos usan 1 para FEMENINO, 2 para MASCULINO
+        sexo_valor = 1 if filtros['sexo'] == 'Femenino' else 2
+        df_filtrado = df_filtrado.filter(F.col('SEXO') == sexo_valor)
     
-    ### FIltro por comorbilidades
-    if filtros['comorbilidades']:
-         for comorb in filtros['comorbilidades']:
-              df_filtrado = df_filtrado.filter(F.col(comorb) == 1)
+    ### Filtro por comorbilidades
+    if filtros.get('comorbilidades'):
+        for comorb in filtros['comorbilidades']:
+            if comorb in df_filtrado.columns:
+                df_filtrado = df_filtrado.filter(F.col(comorb) == 1)
+    
+    # Contar resultados para debug
+    count = df_filtrado.count()
+    print(f"Filtro aplicado: {count} registros resultantes")
     
     return df_filtrado
 
 
-def frecuencia_comorbilidades(df_spark, lista_comorbilidades):
-    '''
-    Cuenta la frecuencia de comorbilidades del Dataframe que se filtro
-
-    Args:  
-        df_spark : Dataframe de Spark con los filtros realizados
-        lista_comorbilidades : Lista con las comorbilidades anotadas
-    Returns:
-        diccionario con la frecuencia de las comorbilidades
-
-    '''
-
-    resultados = []
-    for comorb in lista_comorbilidades:
-        if comorb in df_spark.columns:
-            conteo = df_spark.filter(F.col(comorb)==1).count()
-            resultados.append({
-                'comorbilidad' : comorb,
-                'conteo' : conteo
-            })
-    return pd.DataFrame(resultados)
-
 def calcula_metricas_principales(df_spark):
     '''
-    Caluclar las metricas principales para mostrarlas en un header
+    Calcular las metricas principales
     Return:
-        DIccionario con los valores de las metricas principales 
+        Diccionario con los valores de las metricas principales 
     '''
+    # Inicializar Spark (¡también necesario aquí!)
+    spark = get_spark_session()
+    
+    print("Calculando métricas...")
+    
     metricas = df_spark.agg(
         F.count('*').alias('Total'),
         F.avg('EDAD').alias('media_Edad'),
-        F.sum(F.when(F.col('Sobrevivio') == 1, 1).otherwise(0)).alias('Sobrevivieron'),
-        F.sum(F.when(F.col('Sobrevivio') == 0, 1).otherwise(0)).alias('No_Sobrevivieron'),
+        F.sum(F.when(F.col('SOBREVIVIO') == 1, 1).otherwise(0)).alias('Sobrevivieron'),
+        F.sum(F.when(F.col('SOBREVIVIO') == 0, 1).otherwise(0)).alias('No_Sobrevivieron'),
         F.avg('N_COMORBILIDADES').alias('promedio_comorb')
-    ).collect[0]
+    ).collect()[0]
 
     resultado = {
-        'Total' : metricas['Total'],
-        'media_Edad' : metricas['media_Edad'],
-        'Supervivientes' : metricas['Sobrevivieron'],
-        'No_Supervivientes' : metricas['No_Sobrevivieron'],
-        'promedio_comorb' : metricas['promedio_comorb']
+        'Total': metricas['Total'],
+        'media_Edad': round(metricas['media_Edad'], 1) if metricas['media_Edad'] else 0,
+        'Supervivientes': metricas['Sobrevivieron'] or 0,
+        'No_Supervivientes': metricas['No_Sobrevivieron'] or 0,
+        'promedio_comorb': round(metricas['promedio_comorb'], 1) if metricas['promedio_comorb'] else 0
     }
 
-    if resultado['Total'] > 0 :
-         resultado['pct_supervivencia'] = round(resultado['Supervivientes'] / resultado['Total'] * 100, 1)
-         resultado['pct_mortalidad'] = round(resultado['No_Supervivientes'] / resultado['Total'] * 100, 1) 
-         
+    if resultado['Total'] > 0:
+        resultado['pct_supervivencia'] = round(
+            resultado['Supervivientes'] / resultado['Total'] * 100, 1
+        )
+        resultado['pct_mortalidad'] = round(
+            resultado['No_Supervivientes'] / resultado['Total'] * 100, 1
+        )
+    
+    print(f"Métricas calculadas: {resultado}")
     return resultado
 
-def datos_graficos(df_spark, limite = 1000):
+
+def datos_graficos(df_spark, limite=1000):
     '''
-    Muestreo para gŕaficos
+    Muestreo para gráficos
     Returns:
         pandas Dataframe para usarlo con plotly
     '''
+    # Inicializar Spark
+    spark = get_spark_session()
+    
+    print("Preparando datos para gráficos...")
+    
     muestra_spark = df_spark.select('EDAD', 'SOBREVIVIO').sample(0.1).limit(limite)
     muestra_pandas = muestra_spark.toPandas()
 
-    muestra_pandas['Resultado'] = muestra_pandas['SOBREVIVIO'].map({
-         1 : 'SOBREVIVIO',
-         0 : 'Falleció'
-    })
-
+    if len(muestra_pandas) > 0:
+        muestra_pandas['Resultado'] = muestra_pandas['SOBREVIVIO'].map({
+            1: 'Sobrevivio',
+            0: 'Fallecio'
+        })
+    
+    print(f"Datos gráficos: {len(muestra_pandas)} registros")
     return muestra_pandas

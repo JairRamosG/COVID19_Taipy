@@ -1,0 +1,31 @@
+{
+"id": "JOB_task_filtrar_datos_d2057aea-dddc-49db-b6c7-5775bd2f2db5",
+"task_id": "TASK_task_filtrar_datos_c8bb9130-81e4-45d0-8bc8-55b1098be7fc",
+"status": "<Status.FAILED: 6>",
+"status_change_records": {
+"SUBMITTED": "2026-03-02T14:36:40.357491",
+"PENDING": "2026-03-02T14:36:40.391694",
+"RUNNING": "2026-03-02T14:36:40.419001",
+"FAILED": "2026-03-02T14:36:49.488107"
+},
+"force": false,
+"submit_id": "SUBMISSION_a2fc4103-0e8a-4ca5-8179-645c9c18cb88",
+"submit_entity_id": "SCENARIO_main_escenario_6161645c-0d16-49f3-8e4e-3626e49a826f",
+"creation_date": "2026-03-02T14:36:40.357491",
+"subscribers": [
+{
+"fct_name": "_Orchestrator._update_submission_status",
+"fct_params": [],
+"fct_module": "taipy.core._orchestrator._orchestrator"
+},
+{
+"fct_name": "_Orchestrator._on_status_change",
+"fct_params": [],
+"fct_module": "taipy.core._orchestrator._orchestrator"
+}
+],
+"stacktrace": [
+"Traceback (most recent call last):\n  File \"/home/jair/anaconda3/envs/BigData/lib/python3.11/site-packages/taipy/core/_orchestrator/_dispatcher/_task_function_wrapper.py\", line 49, in execute\n    results = self._execute_fct(arguments)\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/jair/anaconda3/envs/BigData/lib/python3.11/site-packages/taipy/core/_orchestrator/_dispatcher/_task_function_wrapper.py\", line 77, in _execute_fct\n    return self.task.function(*arguments)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/jair/Proyectos/taipy_COVID/src/algorithms/filtros.py\", line 33, in aplicar_filtros\n    df_filtrado = covid_data.filter(\n                  ^^^^^^^^^^^^^^^^^^\n  File \"/home/jair/anaconda3/envs/BigData/lib/python3.11/site-packages/pandas/core/generic.py\", line 5815, in filter\n    items = Index(items).intersection(labels)\n            ^^^^^^^^^^^^\n  File \"/home/jair/anaconda3/envs/BigData/lib/python3.11/site-packages/pandas/core/indexes/base.py\", line 485, in __new__\n    name = maybe_extract_name(name, data, cls)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/jair/anaconda3/envs/BigData/lib/python3.11/site-packages/pandas/core/indexes/base.py\", line 7758, in maybe_extract_name\n    if name is None and isinstance(obj, (Index, ABCSeries)):\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/jair/anaconda3/envs/BigData/lib/python3.11/site-packages/pandas/core/dtypes/generic.py\", line 44, in _instancecheck\n    return _check(inst) and not isinstance(inst, type)\n           ^^^^^^^^^^^^\n  File \"/home/jair/anaconda3/envs/BigData/lib/python3.11/site-packages/pandas/core/dtypes/generic.py\", line 38, in _check\n    return getattr(inst, attr, \"_typ\") in comp\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/jair/anaconda3/envs/BigData/lib/python3.11/site-packages/pyspark/sql/classic/column.py\", line 613, in __nonzero__\n    raise PySparkValueError(\npyspark.errors.exceptions.base.PySparkValueError: [CANNOT_CONVERT_COLUMN_INTO_BOOL] Cannot convert column into bool: please use '&' for 'and', '|' for 'or', '~' for 'not' when building DataFrame boolean expressions.\n"
+],
+"version": "ee83111d-6828-4fca-b2ed-9ff013a96f2f"
+}
