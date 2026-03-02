@@ -1,5 +1,6 @@
 from taipy import Config
-from algorithms import filtros
+from src.algorithms import filtros
+from taipy.common.config import Scope
 
 ##################### Definicion de los Data Nodes de ENTRADA
 
@@ -8,7 +9,7 @@ covid_data_config = Config.configure_data_node(
     id = "covid_data",
     storage_type = "parquet",
     path = "data/parquet/df_final.parquet",
-    scope = "global"
+    scope = Scope.SCENARIO
     )
 # para lso filtros
 filter_config = Config.configure_data_node(
@@ -19,7 +20,8 @@ filter_config = Config.configure_data_node(
         "edad_max" : 100,
         "Sexo" : "Todos",
         "comorbilidades" : []
-    }
+    },
+    scope = Scope.SCENARIO
 )
 
 ### Definicion de los Data Nodes de SALIDA
@@ -27,19 +29,22 @@ filter_config = Config.configure_data_node(
 # para los resultados
 resultado_config = Config.configure_data_node(
     id = "resultado",
-    storage_type = "pickle"
+    storage_type = "pickle",
+    scope = Scope.SCENARIO
 )
 
 # para las metricas
 metricas_config = Config.configure_data_node(
     id = "metricas",
-    storage_type = "pickle"
+    storage_type = "pickle",
+    scope = Scope.SCENARIO
 )
 
 # para la info de las gráficas
 datos_graficas_config = Config.configure_data_node(
     id = "datos_graficas",
-    storage_type = "pickle"
+    storage_type = "pickle",
+    scope = Scope.SCENARIO
 )
 
 
@@ -47,44 +52,37 @@ datos_graficas_config = Config.configure_data_node(
 
 # para aplciar filtros
 filtrar_task_config = Config.configure_task(
-    id = "filtrar_datos",
+    id = "task_filtrar_datos",
     function = filtros.aplicar_filtros,
-    inputs = [covid_data_config, filter_config],
-    outputs = [resultado_config]
+    input = [covid_data_config, filter_config],
+    output = resultado_config
 )
 
 # para calcular las metricas
 calcula_metricas_task_config = Config.configure_task(
-    id = 'calcula_metricas',
+    id = 'task_calcula_metricas',
     function = filtros.calcula_metricas_principales,
-    inputs = [resultado_config],
-    outputs = [metricas_config]
+    input = [resultado_config],
+    output = metricas_config
 )
 
 # para los datos de los gráficos
 datos_graficas_task_config = Config.configure_task(
-    id = 'datos_graficas',
+    id = 'task_datos_graficas_',
     function = filtros.datos_graficos,
-    inputs = [resultado_config],
-    outputs = [datos_graficas_config]
+    input = [resultado_config],
+    output = datos_graficas_config
 )
 
-##################### Definir el PIPELINE
+##################### Definir un ESCENARIO sin pipeline intermedio
 
-main_pipeline_config = Config.configure_pipeline(
-    id = "main_pipeline",
+escenario_config = Config.configure_scenario(
+    id = "main_escenario",
     task_configs = [
         filtrar_task_config,
         calcula_metricas_task_config,
         datos_graficas_task_config
     ]
-)
-
-##################### Definir un ESCENARIO
-
-escenario_config = Config.configure_scenario(
-    id = "main_escenario",
-    pipeline_configs = [main_pipeline_config]
 )
 
 ##################### Exportar las CONFIGURACIONES
@@ -95,6 +93,5 @@ __all__ = [
     resultado_config,
     metricas_config,
     datos_graficas_config,
-    main_pipeline_config,
     escenario_config
 ]

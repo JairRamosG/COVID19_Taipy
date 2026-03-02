@@ -1,0 +1,22 @@
+{
+"id": "DATANODE_datos_graficas_e7f8ac56-1a97-4438-be67-517692a05f1b",
+"config_id": "datos_graficas",
+"scope": "<Scope.SCENARIO: 1>",
+"storage_type": "pickle",
+"owner_id": "SCENARIO_main_escenario_e5848fc1-c766-45dd-8edb-a610b433df49",
+"parent_ids": [
+"TASK_task_datos_graficas__ea31b6f7-08a6-4ce7-b4fe-986d58579699"
+],
+"last_edit_date": null,
+"edits": [],
+"version": "ee83111d-6828-4fca-b2ed-9ff013a96f2f",
+"validity_days": null,
+"validity_seconds": null,
+"edit_in_progress": false,
+"editor_id": null,
+"editor_expiration_date": null,
+"data_node_properties": {
+"is_generated": true,
+"path": "user_data/pickles/DATANODE_datos_graficas_e7f8ac56-1a97-4438-be67-517692a05f1b.p"
+}
+}

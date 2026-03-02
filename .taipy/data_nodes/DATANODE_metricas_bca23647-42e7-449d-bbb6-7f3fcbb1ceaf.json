@@ -1,0 +1,22 @@
+{
+"id": "DATANODE_metricas_bca23647-42e7-449d-bbb6-7f3fcbb1ceaf",
+"config_id": "metricas",
+"scope": "<Scope.SCENARIO: 1>",
+"storage_type": "pickle",
+"owner_id": "SCENARIO_main_escenario_e5848fc1-c766-45dd-8edb-a610b433df49",
+"parent_ids": [
+"TASK_task_calcula_metricas_7f2d612c-1f01-447d-8b6a-f2be38143766"
+],
+"last_edit_date": null,
+"edits": [],
+"version": "ee83111d-6828-4fca-b2ed-9ff013a96f2f",
+"validity_days": null,
+"validity_seconds": null,
+"edit_in_progress": false,
+"editor_id": null,
+"editor_expiration_date": null,
+"data_node_properties": {
+"is_generated": true,
+"path": "user_data/pickles/DATANODE_metricas_bca23647-42e7-449d-bbb6-7f3fcbb1ceaf.p"
+}
+}

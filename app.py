@@ -13,14 +13,18 @@ if __name__ == "__main__":
     print(f"Escenario creado {escenario.id}")
 
     print("3. Ejecutar el pipeline con los datos iniciales")
-    tp.submit(escenario)
+    
+    try:
+        tp.submit(escenario)
+    except Exception as e:
+        print(f'{e}')
 
     print("4. Verificar que los DataNodes funcionan")
     try:
-        metricas_iniciales = escenario.metricas.read() #metricas?
+        metricas_iniciales = escenario.metricas.read() # DataNode id
         print(f"Metricas iniciales: {metricas_iniciales}")
 
-        datos_iniciales = escenario.datos_graficas.read()
+        datos_iniciales = escenario.datos_graficas.read() # DataNode id
         print(f"Datos gráficos: {len(datos_iniciales) if datos_iniciales is not None else 0} registros")
     except Exception as e:
         print(f"{e}")
