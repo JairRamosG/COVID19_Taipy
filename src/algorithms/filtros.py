@@ -2,6 +2,7 @@
 from pyspark.sql import SparkSession
 from pyspark.sql import functions as F
 import pandas as pd
+import time
 
 
 def get_spark_session():
@@ -15,44 +16,80 @@ def get_spark_session():
         .config('spark.driver.maxResultSize', '4g') \
         .getOrCreate()
 
-def aplicar_filtros(covid_data_pd, filtros):
-    print("="*50)
-    print("1. Iniciando función aplicar_filtros")
-    print(f"2. Tipo de covid_data_pd: {type(covid_data_pd)}")
+def aplicar_filtros(ruta_parquet, filtros):
+    '''
+    Filtra los datos leyendo directamente con Spark desde la ruta
     
-    import time
-    start_total = time.time()
+    Args:
+        ruta_parquet: Ruta a la carpeta con archivos Parquet
+        filtros: Diccionario con los filtros a aplicar
     
-    print("3. Obteniendo sesión Spark...")
+    Returns:
+        DataFrame de Spark filtrado
+    '''
+    inicio_total = time.time()
+    
+    print("\n" + "="*60)
+    print("APLICANDO FILTROS CON SPARK")
+    print("="*60)
+    
+    # 1. Obtener sesión Spark
+    t0 = time.time()
     spark = get_spark_session()
-    print(f"   → Sesión Spark obtenida en {time.time()-start_total:.1f}s")
+    print(f"Sesión Spark lista: {time.time()-t0:.1f}s")
     
-    print("4. Creando DataFrame Spark...")
-    start = time.time()
-    covid_data = spark.createDataFrame(covid_data_pd)
-    print(f"   → DataFrame Spark creado en {time.time()-start:.1f}s")
+    # 2. Leer Parquet directamente con Spark
+    t1 = time.time()
+    print(f"Leyendo Parquet desde: {ruta_parquet}")
     
-    print("5. Aplicando filtro de edad...")
-    start = time.time()
+    try:
+        # Leer la carpeta completa (todas las particiones)
+        covid_data = spark.read.parquet(ruta_parquet)
+        total_registros = covid_data.count()
+        print(f"   → Particiones: {covid_data.rdd.getNumPartitions()}")
+        print(f"   → Registros totales: {total_registros:,}")
+        print(f"Lectura completada: {time.time()-t1:.1f}s")
+    except Exception as e:
+        print(f"Error leyendo Parquet: {e}")
+        raise
+    
+    # 3. Aplicar filtro por edad (siempre presente)
+    t2 = time.time()
+    print(f"Aplicando filtros: {filtros}")
+    
     df_filtrado = covid_data.filter(
         (F.col('EDAD') >= filtros['edad_min']) &
         (F.col('EDAD') <= filtros['edad_max'])
     )
-    print(f"   → Filtro edad aplicado en {time.time()-start:.1f}s")
     
-    print("6. Cacheando resultados...")
-    start = time.time()
+    # 4. Filtro por sexo (opcional)
+    if filtros.get('sexo', 'Todos') != 'Todos':
+        sexo_valor = 1 if filtros['sexo'] == 'Femenino' else 2
+        df_filtrado = df_filtrado.filter(F.col('SEXO') == sexo_valor)
+        print(f"   → Filtro sexo aplicado: {filtros['sexo']} ({sexo_valor})")
+    
+    # 5. Filtro por comorbilidades (opcional)
+    if filtros.get('comorbilidades'):
+        for comorb in filtros['comorbilidades']:
+            if comorb in df_filtrado.columns:
+                df_filtrado = df_filtrado.filter(F.col(comorb) == 1)
+                print(f"   → Filtro {comorb} aplicado")
+    
+    print(f"Filtros aplicados: {time.time()-t2:.1f}s")
+    
+    # 6. Cachear resultados para futuras operaciones
+    t3 = time.time()
     df_filtrado.cache()
-    print(f"   → Cache configurado en {time.time()-start:.1f}s")
-    
-    print("7. Contando resultados...")
-    start = time.time()
     count = df_filtrado.count()
-    print(f"   → Conteo completado en {time.time()-start:.1f}s")
-    print(f"   → Registros resultantes: {count}")
+    print(f"Cacheado: {count:,} registros ({time.time()-t3:.1f}s)")
     
-    print(f"Tiempo total: {time.time()-start_total:.1f}s")
-    print("="*50)
+    # 7. Resumen final
+    print(f"\nRESUMEN FILTROS:")
+    print(f"   → Registros originales: {total_registros:,}")
+    print(f"   → Registros después de filtros: {count:,}")
+    print(f"   → Reducción: {(1 - count/total_registros)*100:.1f}%")
+    print(f"Tiempo total: {time.time()-inicio_total:.1f}s")
+    print("="*60 + "\n")
     
     return df_filtrado
 

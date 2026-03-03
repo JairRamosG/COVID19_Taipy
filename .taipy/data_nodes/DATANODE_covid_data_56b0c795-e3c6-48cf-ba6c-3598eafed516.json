@@ -1,13 +1,13 @@
 {
-"id": "DATANODE_covid_data_a4365d19-0924-4024-b6da-787b7151fb56",
+"id": "DATANODE_covid_data_56b0c795-e3c6-48cf-ba6c-3598eafed516",
 "config_id": "covid_data",
 "scope": "<Scope.SCENARIO: 1>",
 "storage_type": "parquet",
-"owner_id": "SCENARIO_main_escenario_b1e3860b-b72c-45f6-953d-8f9d27cb93de",
+"owner_id": "SCENARIO_main_escenario_70467932-3494-484b-b5b1-8495fe32a7b9",
 "parent_ids": [
-"TASK_task_filtrar_datos_db4c68e8-1bdc-42cb-96bf-cbb399c03786"
+"TASK_task_filtrar_datos_d2762a44-7ba3-4712-b730-9d36818aa7d5"
 ],
-"last_edit_date": "2026-03-02T16:42:16.920281",
+"last_edit_date": "2026-03-02T21:49:28.216380",
 "edits": [],
 "version": "ee83111d-6828-4fca-b2ed-9ff013a96f2f",
 "validity_days": null,
@@ -16,7 +16,7 @@
 "editor_id": null,
 "editor_expiration_date": null,
 "data_node_properties": {
-"path": "data/parquet/df_final.parquet",
+"path": "data/parquet/df_final",
 "engine": "pyarrow",
 "compression": "snappy",
 "exposed_type": "pandas",

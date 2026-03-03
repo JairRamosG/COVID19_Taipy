@@ -1,15 +1,15 @@
 {
-"id": "JOB_task_datos_graficas__219ee172-78fb-4fbb-8922-e7b8c3a9dc06",
-"task_id": "TASK_task_datos_graficas__8935177d-5281-4328-81b1-f65400d8c139",
+"id": "JOB_task_datos_graficas__3e8656cb-44ed-40cf-b244-9cd5abc48d76",
+"task_id": "TASK_task_datos_graficas__73e65d29-caa3-4080-acc2-43ab1b0ed503",
 "status": "<Status.BLOCKED: 2>",
 "status_change_records": {
-"SUBMITTED": "2026-03-02T16:42:17.021298",
-"BLOCKED": "2026-03-02T16:42:17.043880"
+"SUBMITTED": "2026-03-02T21:49:28.287148",
+"BLOCKED": "2026-03-02T21:49:28.307083"
 },
 "force": false,
-"submit_id": "SUBMISSION_d628ab19-ca82-474c-bf61-2de476d95452",
-"submit_entity_id": "SCENARIO_main_escenario_b1e3860b-b72c-45f6-953d-8f9d27cb93de",
-"creation_date": "2026-03-02T16:42:17.021298",
+"submit_id": "SUBMISSION_b1d4f1af-20be-4814-90c4-4b513987089c",
+"submit_entity_id": "SCENARIO_main_escenario_70467932-3494-484b-b5b1-8495fe32a7b9",
+"creation_date": "2026-03-02T21:49:28.287148",
 "subscribers": [
 {
 "fct_name": "_Orchestrator._update_submission_status",

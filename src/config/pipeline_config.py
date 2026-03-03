@@ -5,12 +5,12 @@ from taipy.common.config import Scope
 ##################### Definicion de los Data Nodes de ENTRADA
 
 # para los datos
-covid_data_config = Config.configure_data_node(
-    id = "covid_data",
-    storage_type = "parquet",
-    path = "data/parquet/df_final",
+ruta_config = Config.configure_data_node(
+    id = "ruta_datos",
+    storage_type = "pickle",
+    default_data = "data/parquet/df_final/", 
     scope = Scope.SCENARIO
-    )
+)
 
 # para lso filtros
 filter_config = Config.configure_data_node(
@@ -55,7 +55,7 @@ datos_graficas_config = Config.configure_data_node(
 filtrar_task_config = Config.configure_task(
     id = "task_filtrar_datos",
     function = filtros.aplicar_filtros,
-    input = [covid_data_config, filter_config],
+    input = [ruta_config, filter_config],
     output = resultado_config
 )
 
