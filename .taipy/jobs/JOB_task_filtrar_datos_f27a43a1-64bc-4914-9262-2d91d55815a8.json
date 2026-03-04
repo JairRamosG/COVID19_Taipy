@@ -1,0 +1,31 @@
+{
+"id": "JOB_task_filtrar_datos_f27a43a1-64bc-4914-9262-2d91d55815a8",
+"task_id": "TASK_task_filtrar_datos_da14a34b-ba05-4c39-bfb8-7c3efae7c0bb",
+"status": "<Status.FAILED: 6>",
+"status_change_records": {
+"SUBMITTED": "2026-03-02T21:51:24.327956",
+"PENDING": "2026-03-02T21:51:24.364667",
+"RUNNING": "2026-03-02T21:51:24.396564",
+"FAILED": "2026-03-02T21:51:58.967235"
+},
+"force": false,
+"submit_id": "SUBMISSION_9a71632c-ad77-43b3-9ffa-fbc83a55612b",
+"submit_entity_id": "SCENARIO_main_escenario_f2edfa6f-ffdf-4384-86c2-1f284a2c6382",
+"creation_date": "2026-03-02T21:51:24.327956",
+"subscribers": [
+{
+"fct_name": "_Orchestrator._update_submission_status",
+"fct_params": [],
+"fct_module": "taipy.core._orchestrator._orchestrator"
+},
+{
+"fct_name": "_Orchestrator._on_status_change",
+"fct_params": [],
+"fct_module": "taipy.core._orchestrator._orchestrator"
+}
+],
+"stacktrace": [
+"taipy.core.exceptions.exceptions.DataNodeWritingError: Error writing in datanode id DATANODE_resultado_a932f4da-3f0a-40be-98c2-0fed88e60135: [CONTEXT_ONLY_VALID_ON_DRIVER] It appears that you are attempting to reference SparkContext from a broadcast variable, action, or transformation. SparkContext can only be used on the driver, not in code that it run on workers. For more information, see SPARK-5063.\n"
+],
+"version": "ee83111d-6828-4fca-b2ed-9ff013a96f2f"
+}

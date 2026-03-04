@@ -1,0 +1,18 @@
+{
+"id": "SCENARIO_main_escenario_f2edfa6f-ffdf-4384-86c2-1f284a2c6382",
+"config_id": "main_escenario",
+"tasks": [
+"TASK_task_calcula_metricas_39e3612a-5e46-49b0-9b34-54f0d9af9132",
+"TASK_task_filtrar_datos_da14a34b-ba05-4c39-bfb8-7c3efae7c0bb",
+"TASK_task_datos_graficas__164aefae-3226-4628-ad87-b14bf75746b3"
+],
+"additional_data_nodes": [],
+"properties": {},
+"creation_date": "2026-03-02T21:51:24.284555",
+"primary_scenario": false,
+"subscribers": [],
+"tags": [],
+"version": "ee83111d-6828-4fca-b2ed-9ff013a96f2f",
+"sequences": null,
+"cycle": null
+}

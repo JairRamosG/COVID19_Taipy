@@ -1,22 +1,22 @@
 {
-"id": "DATANODE_datos_graficas_a0f985a5-c859-4500-be2c-cfaf61238712",
+"id": "DATANODE_datos_graficas_53c5df01-3721-46c8-9e1f-319e0a8c74ff",
 "config_id": "datos_graficas",
 "scope": "<Scope.SCENARIO: 1>",
 "storage_type": "pickle",
-"owner_id": "SCENARIO_main_escenario_70467932-3494-484b-b5b1-8495fe32a7b9",
+"owner_id": "SCENARIO_main_escenario_f2edfa6f-ffdf-4384-86c2-1f284a2c6382",
 "parent_ids": [
-"TASK_task_datos_graficas__73e65d29-caa3-4080-acc2-43ab1b0ed503"
+"TASK_task_datos_graficas__164aefae-3226-4628-ad87-b14bf75746b3"
 ],
 "last_edit_date": null,
 "edits": [],
 "version": "ee83111d-6828-4fca-b2ed-9ff013a96f2f",
 "validity_days": null,
 "validity_seconds": null,
-"edit_in_progress": true,
+"edit_in_progress": false,
 "editor_id": null,
 "editor_expiration_date": null,
 "data_node_properties": {
 "is_generated": true,
-"path": "user_data/pickles/DATANODE_datos_graficas_a0f985a5-c859-4500-be2c-cfaf61238712.p"
+"path": "user_data/pickles/DATANODE_datos_graficas_53c5df01-3721-46c8-9e1f-319e0a8c74ff.p"
 }
 }

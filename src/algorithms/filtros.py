@@ -93,6 +93,13 @@ def aplicar_filtros(ruta_parquet, filtros):
     
     return df_filtrado
 
+def leer_resultado(ruta_resultado):
+    '''
+    Lee un DataFrame de Spark desde parquet
+    '''
+    spark = get_spark_session()
+    return spark.read.parquet(ruta_resultado)
+
 def calcula_metricas_principales(df_spark):
     '''
     Calcular las metricas principales
