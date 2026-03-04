@@ -63,7 +63,7 @@ filtrar_task_config = Config.configure_task(
 calcula_metricas_task_config = Config.configure_task(
     id = 'task_calcula_metricas',
     function = filtros.calcula_metricas_principales,
-    input = [resultado_config],
+    input = resultado_config,
     output = metricas_config
 )
 
