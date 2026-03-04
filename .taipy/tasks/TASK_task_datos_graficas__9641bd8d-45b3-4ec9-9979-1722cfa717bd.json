@@ -1,0 +1,19 @@
+{
+"id": "TASK_task_datos_graficas__9641bd8d-45b3-4ec9-9979-1722cfa717bd",
+"owner_id": "SCENARIO_main_escenario_c93341c5-7642-48ed-a96e-16506f27782c",
+"parent_ids": [
+"SCENARIO_main_escenario_c93341c5-7642-48ed-a96e-16506f27782c"
+],
+"config_id": "task_datos_graficas_",
+"input_ids": [
+"DATANODE_resultado_e192352d-62ae-403c-9f0b-95b55f890d2a"
+],
+"function_name": "datos_graficos",
+"function_module": "src.algorithms.filtros",
+"output_ids": [
+"DATANODE_datos_graficas_9e4ccfcd-bda6-4bcb-b69f-35341bb65b37"
+],
+"version": "ee83111d-6828-4fca-b2ed-9ff013a96f2f",
+"skippable": false,
+"properties": {}
+}

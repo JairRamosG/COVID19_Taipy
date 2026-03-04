@@ -1,0 +1,26 @@
+{
+"id": "SUBMISSION_85de5c73-a335-4d9f-a9b7-8c5a3dc91c3b",
+"entity_id": "SCENARIO_main_escenario_c93341c5-7642-48ed-a96e-16506f27782c",
+"entity_type": "SCENARIO",
+"entity_config_id": "main_escenario",
+"job_ids": [
+"JOB_task_filtrar_datos_b6da9f4f-6d3d-4dce-8bf2-82d21659565c",
+"JOB_task_datos_graficas__9646dcd1-b942-46a4-ba8a-4c37318f3180",
+"JOB_task_calcula_metricas_7fb67290-0a0f-4cbf-b7d7-d7c6a1530605"
+],
+"properties": {},
+"creation_date": "2026-03-04T12:08:54.758173",
+"submission_status": "<SubmissionStatus.FAILED: 6>",
+"version": "ee83111d-6828-4fca-b2ed-9ff013a96f2f",
+"is_completed": false,
+"is_abandoned": false,
+"is_canceled": false,
+"running_jobs": [
+"JOB_task_filtrar_datos_b6da9f4f-6d3d-4dce-8bf2-82d21659565c"
+],
+"blocked_jobs": [
+"JOB_task_calcula_metricas_7fb67290-0a0f-4cbf-b7d7-d7c6a1530605",
+"JOB_task_datos_graficas__9646dcd1-b942-46a4-ba8a-4c37318f3180"
+],
+"pending_jobs": []
+}

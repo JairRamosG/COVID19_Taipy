@@ -1,0 +1,27 @@
+{
+"id": "DATANODE_datos_graficas_9e4ccfcd-bda6-4bcb-b69f-35341bb65b37",
+"config_id": "datos_graficas",
+"scope": "<Scope.SCENARIO: 1>",
+"storage_type": "parquet",
+"owner_id": "SCENARIO_main_escenario_c93341c5-7642-48ed-a96e-16506f27782c",
+"parent_ids": [
+"TASK_task_datos_graficas__9641bd8d-45b3-4ec9-9979-1722cfa717bd"
+],
+"last_edit_date": null,
+"edits": [],
+"version": "ee83111d-6828-4fca-b2ed-9ff013a96f2f",
+"validity_days": null,
+"validity_seconds": null,
+"edit_in_progress": false,
+"editor_id": null,
+"editor_expiration_date": null,
+"data_node_properties": {
+"engine": "pyarrow",
+"compression": "snappy",
+"exposed_type": "pandas",
+"read_kwargs": {},
+"write_kwargs": {},
+"is_generated": true,
+"path": "user_data/parquets/DATANODE_datos_graficas_9e4ccfcd-bda6-4bcb-b69f-35341bb65b37.parquet"
+}
+}

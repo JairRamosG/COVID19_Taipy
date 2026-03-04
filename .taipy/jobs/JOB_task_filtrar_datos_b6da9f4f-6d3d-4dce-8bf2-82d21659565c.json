@@ -1,0 +1,31 @@
+{
+"id": "JOB_task_filtrar_datos_b6da9f4f-6d3d-4dce-8bf2-82d21659565c",
+"task_id": "TASK_task_filtrar_datos_53ab4a26-0bc0-4ad2-8b1f-8e146d91bba9",
+"status": "<Status.FAILED: 6>",
+"status_change_records": {
+"SUBMITTED": "2026-03-04T12:08:54.787666",
+"PENDING": "2026-03-04T12:08:54.820673",
+"RUNNING": "2026-03-04T12:08:54.846196",
+"FAILED": "2026-03-04T12:09:24.768070"
+},
+"force": false,
+"submit_id": "SUBMISSION_85de5c73-a335-4d9f-a9b7-8c5a3dc91c3b",
+"submit_entity_id": "SCENARIO_main_escenario_c93341c5-7642-48ed-a96e-16506f27782c",
+"creation_date": "2026-03-04T12:08:54.787666",
+"subscribers": [
+{
+"fct_name": "_Orchestrator._update_submission_status",
+"fct_params": [],
+"fct_module": "taipy.core._orchestrator._orchestrator"
+},
+{
+"fct_name": "_Orchestrator._on_status_change",
+"fct_params": [],
+"fct_module": "taipy.core._orchestrator._orchestrator"
+}
+],
+"stacktrace": [
+"taipy.core.exceptions.exceptions.DataNodeWritingError: Error writing in datanode id DATANODE_resultado_e192352d-62ae-403c-9f0b-95b55f890d2a: DataFrame constructor not properly called!\n"
+],
+"version": "ee83111d-6828-4fca-b2ed-9ff013a96f2f"
+}

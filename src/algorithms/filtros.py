@@ -82,8 +82,19 @@ def aplicar_filtros(ruta_parquet, filtros):
     df_filtrado.cache()
     count = df_filtrado.count()
     print(f"Cacheado: {count:,} registros ({time.time()-t3:.1f}s)")
+
+    # 7. Conversion a pandas
+    print('COnvirtiendolo de pyspark a pandas para lectura de taipy')
+    t4 = time.time()
+
+    if count > 1000000:
+        print(f'Demasiadios registros ({count:,})')
+        df_filtrado = df_filtrado.limit(1000000)
     
-    # 7. Resumen final
+    df_pandas = df_filtrado.toPandas()
+    print(f'COnversion completa: ({len(df_pandas):,} registros) en {time.time()-t4:.1f} segundos')
+    
+    # 8. Resumen final
     print(f"\nRESUMEN FILTROS:")
     print(f"   → Registros originales: {total_registros:,}")
     print(f"   → Registros después de filtros: {count:,}")

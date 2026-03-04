@@ -1,16 +1,16 @@
 {
-"id": "DATANODE_filtros_a2f846fa-98ab-4d38-a42c-2c44e96eb6b0",
+"id": "DATANODE_filtros_d5ccac0c-3557-4706-85d7-68273a3aa94a",
 "config_id": "filtros",
 "scope": "<Scope.SCENARIO: 1>",
 "storage_type": "pickle",
-"owner_id": "SCENARIO_main_escenario_f2edfa6f-ffdf-4384-86c2-1f284a2c6382",
+"owner_id": "SCENARIO_main_escenario_c93341c5-7642-48ed-a96e-16506f27782c",
 "parent_ids": [
-"TASK_task_filtrar_datos_da14a34b-ba05-4c39-bfb8-7c3efae7c0bb"
+"TASK_task_filtrar_datos_53ab4a26-0bc0-4ad2-8b1f-8e146d91bba9"
 ],
-"last_edit_date": "2026-03-02T21:51:24.277173",
+"last_edit_date": "2026-03-04T12:08:54.736377",
 "edits": [
 {
-"timestamp": "2026-03-02T21:51:24.277173",
+"timestamp": "2026-03-04T12:08:54.736377",
 "editor": "TAIPY",
 "comment": "Default data written."
 }
@@ -23,6 +23,6 @@
 "editor_expiration_date": null,
 "data_node_properties": {
 "is_generated": true,
-"path": "user_data/pickles/DATANODE_filtros_a2f846fa-98ab-4d38-a42c-2c44e96eb6b0.p"
+"path": "user_data/pickles/DATANODE_filtros_d5ccac0c-3557-4706-85d7-68273a3aa94a.p"
 }
 }

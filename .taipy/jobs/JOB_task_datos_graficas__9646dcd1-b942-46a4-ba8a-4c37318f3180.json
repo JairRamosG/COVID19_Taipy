@@ -1,0 +1,28 @@
+{
+"id": "JOB_task_datos_graficas__9646dcd1-b942-46a4-ba8a-4c37318f3180",
+"task_id": "TASK_task_datos_graficas__9641bd8d-45b3-4ec9-9979-1722cfa717bd",
+"status": "<Status.ABANDONED: 9>",
+"status_change_records": {
+"SUBMITTED": "2026-03-04T12:08:54.802963",
+"BLOCKED": "2026-03-04T12:08:54.830463",
+"ABANDONED": "2026-03-04T12:09:24.795655"
+},
+"force": false,
+"submit_id": "SUBMISSION_85de5c73-a335-4d9f-a9b7-8c5a3dc91c3b",
+"submit_entity_id": "SCENARIO_main_escenario_c93341c5-7642-48ed-a96e-16506f27782c",
+"creation_date": "2026-03-04T12:08:54.802963",
+"subscribers": [
+{
+"fct_name": "_Orchestrator._update_submission_status",
+"fct_params": [],
+"fct_module": "taipy.core._orchestrator._orchestrator"
+},
+{
+"fct_name": "_Orchestrator._on_status_change",
+"fct_params": [],
+"fct_module": "taipy.core._orchestrator._orchestrator"
+}
+],
+"stacktrace": [],
+"version": "ee83111d-6828-4fca-b2ed-9ff013a96f2f"
+}

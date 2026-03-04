@@ -30,7 +30,8 @@ filter_config = Config.configure_data_node(
 # para los resultados
 resultado_config = Config.configure_data_node(
     id = "resultado",
-    storage_type = "pickle",
+    storage_type = "parquet",
+    path = "data/results/resultado.parquet",
     scope = Scope.SCENARIO
 )
 
@@ -44,7 +45,7 @@ metricas_config = Config.configure_data_node(
 # para la info de las gráficas
 datos_graficas_config = Config.configure_data_node(
     id = "datos_graficas",
-    storage_type = "pickle",
+    storage_type = "parquet",
     scope = Scope.SCENARIO
 )
 

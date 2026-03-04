@@ -1,0 +1,20 @@
+{
+"id": "TASK_task_filtrar_datos_53ab4a26-0bc0-4ad2-8b1f-8e146d91bba9",
+"owner_id": "SCENARIO_main_escenario_c93341c5-7642-48ed-a96e-16506f27782c",
+"parent_ids": [
+"SCENARIO_main_escenario_c93341c5-7642-48ed-a96e-16506f27782c"
+],
+"config_id": "task_filtrar_datos",
+"input_ids": [
+"DATANODE_ruta_datos_cde5ca7f-20e2-408c-838f-13f45ef5840a",
+"DATANODE_filtros_d5ccac0c-3557-4706-85d7-68273a3aa94a"
+],
+"function_name": "aplicar_filtros",
+"function_module": "src.algorithms.filtros",
+"output_ids": [
+"DATANODE_resultado_e192352d-62ae-403c-9f0b-95b55f890d2a"
+],
+"version": "ee83111d-6828-4fca-b2ed-9ff013a96f2f",
+"skippable": false,
+"properties": {}
+}

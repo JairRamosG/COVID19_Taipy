@@ -1,0 +1,29 @@
+{
+"id": "DATANODE_resultado_e192352d-62ae-403c-9f0b-95b55f890d2a",
+"config_id": "resultado",
+"scope": "<Scope.SCENARIO: 1>",
+"storage_type": "parquet",
+"owner_id": "SCENARIO_main_escenario_c93341c5-7642-48ed-a96e-16506f27782c",
+"parent_ids": [
+"TASK_task_filtrar_datos_53ab4a26-0bc0-4ad2-8b1f-8e146d91bba9",
+"TASK_task_datos_graficas__9641bd8d-45b3-4ec9-9979-1722cfa717bd",
+"TASK_task_calcula_metricas_d2a63a59-6f0c-4515-88e5-c96a543e7ebc"
+],
+"last_edit_date": null,
+"edits": [],
+"version": "ee83111d-6828-4fca-b2ed-9ff013a96f2f",
+"validity_days": null,
+"validity_seconds": null,
+"edit_in_progress": false,
+"editor_id": null,
+"editor_expiration_date": null,
+"data_node_properties": {
+"path": "data/results/resultado.parquet",
+"engine": "pyarrow",
+"compression": "snappy",
+"exposed_type": "pandas",
+"read_kwargs": {},
+"write_kwargs": {},
+"is_generated": false
+}
+}
